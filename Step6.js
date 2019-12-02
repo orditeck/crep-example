@@ -1,0 +1,36 @@
+import React, { useState, useEffect } from "react";
+import Hello from "./Hello";
+
+export default () => {
+  const [name, setName] = useState(localStorage.getItem("name") || "React");
+
+  useEffect(() => {
+    localStorage.setItem("name", name);
+  }, [name]);
+
+  return (
+    <div className="container py-2">
+      <Hello name={name} />
+      <p>Start editing to see some magic happen :)</p>
+      <button onClick={() => setName("Keven")}>Je m'appelle Keven</button>
+      <button onClick={() => setName("Dylan")}>Je m'appelle Dylan</button>
+      <hr />
+      <p>
+        Je m'appelle:
+        <input
+          type="text"
+          className="form-control"
+          onChange={e => setName(e.target.value)}
+          value={name}
+        />
+      </p>
+      <hr />
+      <h1>Todolist</h1>
+      <ul>
+        {["Apprendre le JavaScript", "Apprendre React"].map(todo => (
+          <li>{todo}</li>
+        ))}
+      </ul>
+    </div>
+  );
+};
